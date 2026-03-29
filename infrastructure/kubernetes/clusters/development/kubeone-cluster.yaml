@@ -1,0 +1,39 @@
+apiVersion: kubeone.k8c.io/v1beta2
+kind: KubeOneCluster
+
+name: llmops-playground
+
+cloudProvider:
+  none: {}
+
+versions:
+  kubernetes: v1.34.0
+
+apiEndpoint:
+  host: 0.0.0.0
+  port: 6443
+
+controlPlane:
+  hosts:
+    - sshPort: 22
+      sshPrivateKeyFile: ./.key
+      publicAddress: 0.0.0.0
+
+clusterNetwork:
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/12"
+  cni:
+    external: {}
+  kubeProxy:
+    skipInstallation: true
+
+machineController:
+  deploy: false
+
+operatingSystemManager:
+  deploy: false
+
+staticWorkers:
+  hosts:
+
+dynamicWorkers: []

@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: nv-sentinel
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: metadata-collector
+    app.kubernetes.io/version: 1.0.0
+    helm.sh/chart: metadata-collector-0.1.0
+  name: metadata-collector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: metadata-collector
+subjects:
+- kind: ServiceAccount
+  name: metadata-collector
+  namespace: nv-sentinel

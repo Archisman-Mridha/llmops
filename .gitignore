@@ -1,0 +1,8 @@
+/.direnv
+/.devenv
+
+*.key
+
+*.tar.gz
+
+kubeconfig.yaml

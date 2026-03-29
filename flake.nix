@@ -6,6 +6,8 @@
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kue.url = "github:Archisman-Mridha/kue";
   };
 
   nixConfig = {
@@ -19,6 +21,7 @@
       nixpkgs,
       devenv,
       systems,
+      kue,
       ...
     }@inputs:
     let
@@ -35,7 +38,12 @@
             inherit inputs pkgs;
             modules = [
               {
-                packages = [ ];
+                packages = with pkgs; [
+                  uv
+
+                  timoni
+                  kue.packages.${system}.default
+                ];
               }
             ];
           };

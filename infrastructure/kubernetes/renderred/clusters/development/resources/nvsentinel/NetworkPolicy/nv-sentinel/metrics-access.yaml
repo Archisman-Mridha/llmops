@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    app.kubernetes.io/instance: nv-sentinel
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nvsentinel
+    app.kubernetes.io/version: v1.0.0
+    helm.sh/chart: nvsentinel-v1.0.0
+  name: metrics-access
+  namespace: nv-sentinel
+spec:
+  ingress:
+  - ports:
+    - port: 2112
+      protocol: TCP
+    - port: 9216
+      protocol: TCP
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/name
+      operator: NotIn
+      values:
+      - incluster-file-server
+  policyTypes:
+  - Ingress
